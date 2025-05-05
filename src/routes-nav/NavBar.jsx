@@ -1,8 +1,10 @@
-import { Link, NavLink } from "react-router-dom";
-import useUser from "../hooks/useUser";
+import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import TripSearchBar from "./TripSearchBar";
+import UserContext from "../context/UserContext";
 
 function NavBar() {
-  const { currentUser, logout } = useUser();
+  const { currentUser, logout } = useContext(UserContext);
 
   return (
     <nav className="bg-white shadow-md p-4 flex justify-between items-center">
@@ -18,6 +20,10 @@ function NavBar() {
       <div className="space-x-4">
         {currentUser ? (
           <>
+            <nav className="flex justify-between items-center px-4 py-2 bg-white shadow">
+              <div>OurTabi</div>
+              <TripSearchBar />
+            </nav>
             <NavLink
               to="/dashboard"
               className="text-gray-600 hover:text-blue-500"

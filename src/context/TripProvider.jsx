@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import TripContext from "./TripContext";
 import OurTabiApi from "../api/ourTabiApi";
-import Spinner from "../common/Spinner";
+import Spinner from "../components/common/Spinner";
 import { useParams } from "react-router-dom";
 
 function TripProvider({ children }) {
@@ -49,7 +49,6 @@ function TripProvider({ children }) {
 
         setComments(tripData.comments);
         setMembers(tripData.members);
-        console.log("trip activities", activitiesData);
 
         const votesByActivity = {};
         activitiesData.forEach((activity) => {
@@ -66,9 +65,17 @@ function TripProvider({ children }) {
   }, [tripId]);
 
   /** Add a member to the trip*/
-  async function addMember(friendId) {
+  async function addMember(friend) {
     try {
-      const newMember = await OurTabiApi.addMemberToTrip(tripId, friendId);
+      const data = await OurTabiApi.addTripMember(friend.userId, tripId);
+      const newMember = {
+        id: data.id,
+        userId: friend.userId,
+        username: friend.username,
+        firstName: friend.firstName,
+        profilePic: friend.profilePic,
+        role: "member",
+      };
       setMembers((prev) => [...prev, newMember]);
     } catch (err) {
       console.error("Error adding member:", err);
@@ -76,10 +83,10 @@ function TripProvider({ children }) {
   }
 
   /** Remove a member from a trip*/
-  async function removeMember(friendId) {
+  async function removeMember(member) {
     try {
-      await OurTabiApi.removeMemberFromTrip(tripId, friendId);
-      setMembers((prev) => prev.filter((member) => member.userId !== friendId));
+      await OurTabiApi.removeTripMember(member.id, tripId);
+      setMembers((prev) => prev.filter((m) => m.id !== member.id));
     } catch (err) {
       console.error("Error removing member:", err);
     }
@@ -104,9 +111,7 @@ function TripProvider({ children }) {
         updatedData
       );
       setActivities((prev) =>
-        prev.map((a) =>
-          a.id === activityId ? updatedActivity : a
-        )
+        prev.map((a) => (a.id === activityId ? updatedActivity : a))
       );
     } catch (err) {
       console.error("Error updating activity:", err);

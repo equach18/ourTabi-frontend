@@ -2,18 +2,19 @@ import { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
-import LoginForm from "../pages/LoginForm";
-import SignupForm from "../pages/SignupForm";
-import NewTripForm from "../pages/NewTripForm";
-import TripDetails from "../pages/trips/TripDetails";
-import NewActivityForm from "../pages/trips/NewActivityForm";
+import LoginForm from "../components/user/LoginForm";
+import SignupForm from "../components/user/SignupForm";
+import NewTripForm from "../components/trip/NewTripForm";
+import TripDetails from "../pages/TripDetails";
+import NewActivityForm from "../components/activity/NewActivityForm";
 import NotFound from "../pages/NotFound";
 import PrivateRoute from "./PrivateRoute";
 import UserContext from "../context/UserContext";
 import TripProvider from "../context/TripProvider";
-import EditTripForm from "../pages/trips/EditTripForm";
-import EditActivityForm from "../pages/trips/EditActivityForm";
-import EditProfileForm from "../pages/user_main/EditProfileForm";
+import EditTripForm from "../components/trip/EditTripForm";
+import EditActivityForm from "../components/activity/EditActivityForm";
+import EditProfileForm from "../components/user/EditProfileForm";
+import TripSearchResults from "../pages/TripSearchResults";
 
 function RouteList() {
   const {
@@ -44,7 +45,15 @@ function RouteList() {
           path="/dashboard"
           element={<Dashboard currentUser={currentUser} trips={trips} />}
         />
-        <Route path="/profile/edit" element={<EditProfileForm currentUser={currentUser} updateUser={updateUser} />} />
+        <Route
+          path="/profile/edit"
+          element={
+            <EditProfileForm
+              currentUser={currentUser}
+              updateUser={updateUser}
+            />
+          }
+        />
         <Route path="/trips/new" element={<NewTripForm addTrip={addTrip} />} />
         <Route
           path="/trips/:tripId"
@@ -58,6 +67,7 @@ function RouteList() {
           path="/trips/:tripId/edit"
           element={<EditTripForm editTrip={editTrip} trips={trips} />}
         />
+        <Route path="/search" element={<TripSearchResults />} />
         <Route
           path="/trips/:tripId/activities/new"
           element={

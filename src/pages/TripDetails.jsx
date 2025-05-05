@@ -1,13 +1,12 @@
 import { useContext, useEffect } from "react";
-import TripContext from "../../context/TripContext";
+import TripContext from "../context/TripContext";
 import { Link, useNavigate } from "react-router-dom";
-// import MembersList from "./MembersList";
-// import CommentsSection from "./CommentsSection";
-import ActivityList from "./ActivityList";
+import MemberPanel from "../components/member/MemberPanel";
+import CommentPanel from "../components/comment/CommentPanel";
+import ActivityList from "../components/activity/ActivityList";
 
 function TripDetails({ currentUser, removeTrip }) {
-  
-  const { trip, activities } = useContext(TripContext);
+  const { trip, activities, members } = useContext(TripContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,7 +15,9 @@ function TripDetails({ currentUser, removeTrip }) {
     }
   }, [trip, navigate]);
 
-  // handle limited access on trip details if user is not a a member
+  // handle limited access on trip details if user is not  a member
+  const isMember = members.some((m) => m.userId === currentUser.id);
+  // handle limited access if user is not the owner
   const isTripCreator = trip.creatorId === currentUser.id;
 
   async function handleDelete() {
@@ -64,19 +65,25 @@ function TripDetails({ currentUser, removeTrip }) {
         <strong>Privacy:</strong> {trip.isPrivate ? "Private" : "Public"}
       </p>
 
-      {/* Members Section */}
-      {/* <MembersList /> */}
-
       {/* Activities Section */}
       <div className="mt-8">
         <ActivityList activities={activities} trip={trip} />
       </div>
 
+      {/* Members Section */}
+      {isMember && (
+        <div className="mt-8">
+          <MemberPanel isTripCreator={isTripCreator} members={members} />
+        </div>
+      )}
+
       {/* Comments Section */}
-      {/* <div className="mt-8">
-        <h2 className="text-2xl font-semibold">Comments</h2>
-        <CommentsSection />
-      </div> */}
+      {isMember && (
+        <div className="mt-8">
+          <h2 className="text-2xl font-semibold">Comments</h2>
+          <CommentPanel />
+        </div>
+      )}
     </div>
   );
 }

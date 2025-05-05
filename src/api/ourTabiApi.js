@@ -89,32 +89,20 @@ class OurTabiApi {
   }
 
   /** Send a friend request to another user */
-  static async sendFriendRequest(username) {
-    let res = await this.request(
-      `users/${username}/friend-request`,
-      {},
-      "post"
-    );
+  static async sendFriendRequest(recipientId) {
+    let res = await this.request(`friends/${recipientId}/`, {}, "post");
     return res.friendRequest;
   }
 
   /** Accept a friend request */
-  static async acceptFriendRequest(username) {
-    let res = await this.request(
-      `users/${username}/friend-request`,
-      {},
-      "patch"
-    );
+  static async acceptFriendRequest(friendId) {
+    let res = await this.request(`friends/${friendId}`, {}, "patch");
     return res.acceptedFriend;
   }
 
   /** Remove a friend or decline a pending request */
-  static async removeFriend(username) {
-    let res = await this.request(
-      `users/${username}/friend-request`,
-      {},
-      "delete"
-    );
+  static async removeFriend(friendId) {
+    let res = await this.request(`friends/${friendId}`, {}, "delete");
     return res.removed;
   }
 
@@ -137,7 +125,7 @@ class OurTabiApi {
   }
 
   /** Get all public trips (or filter by title/destination) */
-  static async getTrips(filters = {}) {
+  static async getPublicTrips(filters = {}) {
     let res = await this.request("trips", filters);
     return res.trips;
   }
@@ -160,9 +148,9 @@ class OurTabiApi {
    *
    */
 
-  /** Add a member to a trip (Trip owner can only add friends) */
-  static async addMemberToTrip(tripId, friendId) {
-    let res = await this.request(
+  /** Add the user's friend to a trip as member (Trip owner can only add friends) */
+  static async addTripMember(friendId, tripId) {
+    const res = await this.request(
       `trips/${tripId}/members`,
       { friendId },
       "post"
@@ -171,9 +159,9 @@ class OurTabiApi {
   }
 
   /** Remove a member from a trip (Only trip owner can do this) */
-  static async removeMemberFromTrip(tripId, friendId) {
-    let res = await this.request(
-      `trips/${tripId}/members/${friendId}`,
+  static async removeTripMember(memberId, tripId) {
+    const res = await this.request(
+      `trips/${tripId}/members/${memberId}`,
       {},
       "delete"
     );
@@ -213,6 +201,7 @@ class OurTabiApi {
     let res = await this.request(`trips/${tripId}/activities`);
     return res.activities;
   }
+
   /** Create a new activity within a trip */
   static async addActivity(tripId, data) {
     let res = await this.request(`trips/${tripId}/activities`, data, "post");

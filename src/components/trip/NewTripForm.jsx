@@ -40,14 +40,17 @@ function NewTripForm({ addTrip }) {
     }
 
     try {
-      const result = await addTrip(formData); 
+      const result = await addTrip(formData);
       if (result.success) {
         navigate(`/trips/${result.trip.id}`);
-      } else{
-        setFormErrors([result.error])
+      } else {
+        setFormErrors([
+          result.error?.message ||
+            String(result.error || "Failed to create trip."),
+        ]);
       }
     } catch (err) {
-      setFormErrors([err]);
+      setFormErrors([err.message || String(err)]);
     } finally {
       setIsSubmitting(false);
     }

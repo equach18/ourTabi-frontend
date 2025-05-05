@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useToggle from "../hooks/useToggle";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation} from "react-router-dom";
+
+import useToggle from "../../hooks/useToggle";
 import Alert from "../common/Alert";
 import Spinner from "../common/Spinner";
 
@@ -14,11 +15,19 @@ import Spinner from "../common/Spinner";
 
 function LoginForm({ login }) {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
   const [formErrors, setFormErrors] = useState([]);
+
+  useEffect(() => {
+    if (location.state?.alert) {
+      setFormErrors([location.state.alert]);
+    }
+  }, [location.state]);
 
   /** Handle form submit: */
   async function handleSubmit(evt) {

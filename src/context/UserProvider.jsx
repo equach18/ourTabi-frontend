@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import UserContext from "./UserContext";
 import OurTabiApi from "../api/ourTabiApi";
-import Spinner from "../common/Spinner";
+import Spinner from "../components/common/Spinner";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 function UserProvider({ children }) {
   const [token, setToken] = useLocalStorage("token", null);
@@ -11,8 +12,10 @@ function UserProvider({ children }) {
   const [trips, setTrips] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [friends, setFriends] = useState([]);
-  const [friendRequests, setFriendRequest] = useState([]);
+  const [incomingRequests, setIncomingRequests] = useState([]);
+  const [sentRequests, setSentRequests] = useState([]);
 
+  const navigate = useNavigate();
   // Load user profile if token exists
   useEffect(() => {
     async function getCurrentUser() {
@@ -23,13 +26,23 @@ function UserProvider({ children }) {
           const { username } = jwtDecode(token);
           const user = await OurTabiApi.getUser(username);
           setCurrentUser(user);
+
           setFriends(user.friends);
-          setFriendRequest(user.friendRequests);
-          setTrips(user.trips)
+          setIncomingRequests(user.incomingRequests);
+          setSentRequests(user.sentRequests);
+
+          setTrips(user.trips);
         } catch (err) {
           console.error("Failed to load user:", err);
           setCurrentUser(null);
           setTrips([]);
+          // redirect the the login page and pass error
+          if (
+            Array.isArray(err) &&
+            err[0] === "You do not have permission to access this page."
+          ) {
+            navigate("/login", { state: { alert: err[0] } });
+          }
         }
       } else {
         setCurrentUser(null);
@@ -107,12 +120,12 @@ function UserProvider({ children }) {
 
       const newTrip = {
         ...createdTrip,
-        role: "owner"
+        role: "owner",
       };
 
       setTrips((prevTrips) => [...prevTrips, newTrip]);
 
-      return { success: true, trip: data };
+      return { success: true, trip: newTrip };
     } catch (err) {
       return { success: false, error: err };
     }
@@ -132,11 +145,13 @@ function UserProvider({ children }) {
 
       const updatedTripWithRole = {
         ...updatedTrip,
-        role: "owner"
+        role: "owner",
       };
 
       setTrips((prevTrips) =>
-        prevTrips.map((trip) => (trip.id === tripId ? updatedTripWithRole : trip))
+        prevTrips.map((trip) =>
+          trip.id === tripId ? updatedTripWithRole : trip
+        )
       );
 
       return { success: true, trip: updatedTrip };
@@ -164,14 +179,70 @@ function UserProvider({ children }) {
   }
 
   /** Function to send a friend request */
-  async function addFriend(username){
-    try{
-      await OurTabiApi.sendFriendRequest(username);
-    }catch(err){
-      console.error("Error adding friend:", err.response?.data || err.message)
+  async function sendRequest(recipient) {
+    try {
+      const newReq = await OurTabiApi.sendFriendRequest(recipient.id);
+      const newSent = {
+        friendId: newReq.id,
+        userId: recipient.id,
+        username: recipient.username,
+        firstName: recipient.firstName,
+        lastName: recipient.lastName,
+        email: recipient.email,
+        profilePic: recipient.profilePic,
+      };
+
+      setSentRequests((prev) => [...prev, newSent]);
+    } catch (err) {
+      console.error("Error adding friend:", err.response?.data || err.message);
     }
   }
 
+  /** Function to accept a friend request */
+  async function acceptRequest(friend) {
+    try {
+      await OurTabiApi.acceptFriendRequest(friend.friendId);
+
+      // const newFriend = {
+      //   id: friend.id,
+
+      //   username: friend.username,
+      //   firstName: friend.firstName,
+      //   lastName: friend.lastName,
+      //   email: friend.email,
+      //   profilePic: friend.profilePic,
+      // };
+      setFriends((prev) => [...prev, friend]);
+
+      // Remove from incomingRequests
+      setIncomingRequests((prev) => prev.filter((f) => f.id !== friend.id));
+    } catch (err) {
+      console.error(
+        "Error accepting friend request:",
+        err.response?.data || err.message
+      );
+    }
+  }
+  /** Function to send a friend request */
+  async function removeFriendship(friend) {
+    try {
+      await OurTabiApi.removeFriend(friend.friendId);
+
+      // Remove from all friend lists
+      setFriends((prev) => prev.filter((f) => f.friendId !== friend.friendId));
+      setIncomingRequests((prev) =>
+        prev.filter((f) => f.friendId !== friend.friendId)
+      );
+      setSentRequests((prev) =>
+        prev.filter((f) => f.friendId !== friend.friendId)
+      );
+    } catch (err) {
+      console.error(
+        "Error removing friend:",
+        err.response?.data || err.message
+      );
+    }
+  }
 
   if (isLoading) return <Spinner />;
 
@@ -188,6 +259,12 @@ function UserProvider({ children }) {
         signup,
         logout,
         removeTrip,
+        friends,
+        incomingRequests,
+        sentRequests,
+        sendRequest,
+        acceptRequest,
+        removeFriendship,
       }}
     >
       {children}

@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import TripContext from "../../context/TripContext";
 import { Link } from "react-router-dom";
 import ActivityVoteButtons from "./ActivityVoteButtons";
 

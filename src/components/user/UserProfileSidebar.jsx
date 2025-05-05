@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import UserContext from "../context/UserContext";
+import UserContext from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 function UserProfileSidebar() {
   const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (!currentUser) return null; // Ensure user data exists
+  if (!currentUser) return null;
 
   return (
     <div className="w-1/4 bg-white p-6 shadow-md rounded-lg">
@@ -19,6 +19,9 @@ function UserProfileSidebar() {
         />
         <h2 className="mt-4 text-xl font-bold">{currentUser.username}</h2>
         <p className="text-gray-500">{currentUser.email}</p>
+        <div>
+          <p className="text-500">{currentUser.bio}</p>
+        </div>
       </div>
 
       {/* Buttons */}

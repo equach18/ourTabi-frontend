@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Alert from "../common/Alert";
-import useToggle from "../hooks/useToggle";
+import useToggle from "../../hooks/useToggle";
 import Spinner from "../common/Spinner";
 
 /** Signup form.

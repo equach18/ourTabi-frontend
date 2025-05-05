@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useLocalStorage from "../hooks/useLocalStorage";
-import UserProfileSidebar from "../components/UserProfileSidebar";
-import FriendPanel from "./user_main/FriendPanel";
+import UserProfileSidebar from "../components/user/UserProfileSidebar";
+import FriendPanel from "../components/friend/FriendPanel";
+import TripCard from "../components/trip/TripCard"
 
 function Dashboard({ currentUser, trips }) {
   const [seenWelcome, setSeenWelcome] = useLocalStorage("seenWelcome", false);
@@ -49,14 +50,7 @@ function Dashboard({ currentUser, trips }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
             {trips.length > 0 ? (
               trips.map((trip) => (
-                <Link
-                  to={`/trips/${trip.id}`}
-                  key={trip.id}
-                  className="border p-4 rounded-lg shadow-md hover:shadow-lg"
-                >
-                  <h3 className="text-xl font-bold">{trip.title}</h3>
-                  <p className="text-gray-600">{trip.destination}</p>
-                </Link>
+                <TripCard key={trip.id} trip={trip} />
               ))
             ) : (
               <p className="text-gray-500">No trips yet. Start planning now!</p>
@@ -64,7 +58,7 @@ function Dashboard({ currentUser, trips }) {
           </div>
         </div>
         <div className="hidden lg:block lg:w-1/4">
-          <FriendPanel />
+          <FriendPanel/>
         </div>
       </div>
     </div>
