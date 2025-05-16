@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-import useToggle from "../../hooks/useToggle";
 import Alert from "../common/Alert";
 import Spinner from "../common/Spinner";
 
@@ -51,40 +50,52 @@ function LoginForm({ login }) {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-3xl font-bold text-blue-500">Login</h1>
+    <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-gradient-to-r from-stone-300 via-white to-stone-300 px-4">
+      <h1 className="text-3xl font-bold text-orange-500 font-heading mb-4">
+        Welcome Back
+      </h1>
+
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-lg w-80 mt-4"
+        className="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm"
       >
-        {formErrors.length > 0 && <Alert type="error" messages={formErrors} />}
+        {formErrors.length > 0 && (
+          <div className="mb-4">
+            <Alert type="error" messages={formErrors} />
+          </div>
+        )}
 
-        <div className="mb-4">
-          <label className="block text-gray-700">Username</label>
+        <div className="mb-3">
+          <label className="block text-zinc-700 text-sm font-medium mb-1">
+            Username
+          </label>
           <input
             type="text"
             name="username"
             value={formData.username}
             onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
+            className="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             required
           />
         </div>
+
         <div className="mb-4">
-          <label className="block text-gray-700">Password</label>
+          <label className="block text-zinc-700 text-sm font-medium mb-1">
+            Password
+          </label>
           <input
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
+            className="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             required
           />
         </div>
 
         <button
           type="submit"
-          className={`bg-blue-500 text-white px-4 py-2 rounded-lg w-full flex items-center justify-center `}
+          className="bg-emerald-600 text-white px-4 py-2 rounded-lg w-full hover:bg-emerald-700 transition"
         >
           Login
         </button>

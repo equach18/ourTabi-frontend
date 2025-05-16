@@ -9,19 +9,20 @@ function FriendPanel() {
 
   const [activeTab, setActiveTab] = useState("all"); // "all", "requests", "sent", "search"
   return (
-    <div className="bg-gray-100 p-6 rounded-lg shadow-md w-full md:w-1/3">
-      <h2 className="text-2xl font-semibold mb-4">Friends</h2>
+    <div className="h-full flex flex-col bg-white rounded-xl shadow p-4">
+      {/* Top: Fixed content */}
+      <div className="mb-4">
+        <h2 className="text-lg font-bold text-zinc-800 mb-2">Friends</h2>
+        <FriendTabs
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          requestCount={incomingRequests.length}
+          sentCount={sentRequests.length}
+        />
+      </div>
 
-      {/* Tab Selector */}
-      <FriendTabs
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        requestCount={incomingRequests.length}
-        sentCount={sentRequests.length}
-      />
-
-      {/* Show Content Based on Active Tab */}
-      <div className="mt-4">
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto space-y-3">
         {activeTab === "all" &&
           (friends.length > 0 ? (
             friends.map((friend) => (

@@ -5,7 +5,7 @@ import Dashboard from "../pages/Dashboard";
 import LoginForm from "../components/user/LoginForm";
 import SignupForm from "../components/user/SignupForm";
 import NewTripForm from "../components/trip/NewTripForm";
-import TripDetails from "../pages/TripDetails";
+import TripDetailsPage from "../pages/TripDetailsPage";
 import NewActivityForm from "../components/activity/NewActivityForm";
 import NotFound from "../pages/NotFound";
 import PrivateRoute from "./PrivateRoute";
@@ -59,7 +59,7 @@ function RouteList() {
           path="/trips/:tripId"
           element={
             <TripProvider>
-              <TripDetails currentUser={currentUser} removeTrip={removeTrip} />
+              <TripDetailsPage currentUser={currentUser} removeTrip={removeTrip} />
             </TripProvider>
           }
         />

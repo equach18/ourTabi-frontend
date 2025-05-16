@@ -9,10 +9,10 @@ function App() {
   return (
     <BrowserRouter>
       <UserProvider>
-          <div className="App">
-            <NavBar />
-            <RouteList />
-          </div>
+        <div className="bg-gradient-to-r from-stone-300 via-white to-stone-300">
+          <NavBar />
+          <RouteList />
+        </div>
       </UserProvider>
     </BrowserRouter>
   );

@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import defaultProfilePic from "../../assets/profilePic.jpg";
+
 
 function UserProfileSidebar() {
   const { currentUser } = useContext(UserContext);
@@ -9,30 +11,30 @@ function UserProfileSidebar() {
   if (!currentUser) return null;
 
   return (
-    <div className="w-1/4 bg-white p-6 shadow-md rounded-lg">
+    <div className="w-full max-w-[260px] bg-white p-4 rounded-xl shadow flex flex-col items-center text-center gap-3">
       {/* Profile Picture */}
-      <div className="flex flex-col items-center">
-        <img
-          src={currentUser.profileImage || "/default-profile.png"} // Use default if none
-          alt="User Profile"
-          className="w-24 h-24 rounded-full border-2 border-gray-300"
-        />
-        <h2 className="mt-4 text-xl font-bold">{currentUser.username}</h2>
-        <p className="text-gray-500">{currentUser.email}</p>
-        <div>
-          <p className="text-500">{currentUser.bio}</p>
-        </div>
-      </div>
+      <img
+        src={currentUser.profilePic || defaultProfilePic}
+        alt="User Profile"
+        className="w-24 h-24 rounded-full border-2 border-gray-300 object-cover"
+      />
 
-      {/* Buttons */}
-      <div className="mt-6 space-y-3">
-        <button
-          onClick={() => navigate("/profile/edit")}
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600"
-        >
-          Edit Profile
-        </button>
-      </div>
+      {/* User Info */}
+      <h2 className="text-lg font-semibold text-zinc-800">
+        {currentUser.username}
+      </h2>
+      <p className="text-sm text-gray-500">{currentUser.email}</p>
+      {currentUser.bio && (
+        <p className="text-sm text-zinc-600 italic">{currentUser.bio}</p>
+      )}
+
+      {/* Edit Button */}
+      <button
+        onClick={() => navigate("/profile/edit")}
+        className="mt-2 w-full bg-gray-400 text-white py-1 rounded-lg hover:bg-gray-500 transition"
+      >
+        Edit Profile
+      </button>
     </div>
   );
 }

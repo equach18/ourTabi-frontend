@@ -1,51 +1,49 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
-import TripSearchBar from "./TripSearchBar";
+import TripSearchBar from "../components/trip/TripSearchBar";
 import UserContext from "../context/UserContext";
 
 function NavBar() {
   const { currentUser, logout } = useContext(UserContext);
 
   return (
-    <nav className="bg-white shadow-md p-4 flex justify-between items-center">
-      {/* Logo */}
+    <nav className="bg-stone-300 shadow px-6 py-4 flex items-center justify-between relative">
+      {/* Left: Logo */}
       <NavLink
         to={currentUser ? "/dashboard" : "/"}
-        className="text-2xl font-bold text-blue-500"
+        className="text-2xl font-bold text-orange-600 font-heading z-10 hover:text-orange-500 transition"
       >
         OurTabi
       </NavLink>
 
-      {/* Navigation Links */}
-      <div className="space-x-4">
+      {/* Center: Search */}
+      {currentUser && (
+        <div className="absolute left-1/2 transform -translate-x-1/2">
+          <TripSearchBar />
+        </div>
+      )}
+
+      {/* Right: Auth Buttons */}
+      <div className="flex items-center space-x-4 z-10">
         {currentUser ? (
-          <>
-            <nav className="flex justify-between items-center px-4 py-2 bg-white shadow">
-              <div>OurTabi</div>
-              <TripSearchBar />
-            </nav>
-            <NavLink
-              to="/dashboard"
-              className="text-gray-600 hover:text-blue-500"
-            >
-              Dashboard
-            </NavLink>
-            <NavLink to="/trips" className="text-gray-600 hover:text-blue-500">
-              My Trips
-            </NavLink>
-            <button
-              onClick={logout}
-              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-            >
-              Logout
-            </button>
-          </>
+          <button
+            onClick={logout}
+            className="text-slate-600 hover:text-orange-500 transition"
+          >
+            Logout
+          </button>
         ) : (
           <>
-            <NavLink to="/login" className="text-gray-600 hover:text-blue-500">
+            <NavLink
+              to="/login"
+              className="text-slate-600 hover:text-orange-500 transition"
+            >
               Login
             </NavLink>
-            <NavLink to="/signup" className="text-gray-600 hover:text-blue-500">
+            <NavLink
+              to="/signup"
+              className="text-slate-600 hover:text-orange-500 transition"
+            >
               Sign Up
             </NavLink>
           </>

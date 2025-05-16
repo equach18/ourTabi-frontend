@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import TripContext from "../../context/TripContext";
+import defaultProfilePic from "../../assets/profilePic.jpg";
 
 function MemberCard({ member, isEditing = false, isTripCreator = false }) {
   const { addMember, removeMember } = useContext(TripContext);
@@ -14,37 +15,41 @@ function MemberCard({ member, isEditing = false, isTripCreator = false }) {
   }
 
   return (
-    <div className="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-3">
+    <div className="flex items-center justify-between bg-gray-50 p-3 rounded-lg shadow-sm">
       <div className="flex items-center gap-3">
         <img
-          src={member.profilePic || "/default-avatar.png"}
+          src={member.profilePic || defaultProfilePic}
           alt={`${member.username}'s avatar`}
-          className="w-10 h-10 rounded-full object-cover"
+          className="w-10 h-10 rounded-full object-cover border"
         />
-        <div>
+        <div className="text-sm">
           <p className="font-semibold">
-            {member.firstName} {member.lastName} ({member.role})
+            {member.firstName} {member.lastName}
+            {isOwner && " (owner)"}
+            {!isOwner && member.role && ` (${member.role})`}
           </p>
-          <p className="text-sm text-gray-500">@{member.username}</p>
+          <p className="text-gray-500">@{member.username}</p>
         </div>
       </div>
-      {isEditing && (
-        <button
-          onClick={handleAddMember}
-          className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm"
-        >
-          Add to Trip
-        </button>
-      )}
-      {isTripCreator && !isOwner && (
-        <button
-          onClick={handleRemoveMember}
-          className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-3 py-1 rounded text-sm"
-        >
-          Remove
-        </button>
-      )}
-      <div className="flex gap-2"></div>
+
+      <div className="flex gap-2">
+        {isEditing && (
+          <button
+            onClick={() => addMember(member)}
+            className="text-sm bg-green-500 hover:bg-green-600 text-white px-2 rounded"
+          >
+            Add
+          </button>
+        )}
+        {isTripCreator && !isOwner && (
+          <button
+            onClick={() => removeMember(member)}
+            className="text-sm bg-red-500 hover:bg-red-600 text-white px-2 rounded"
+          >
+            X
+          </button>
+        )}
+      </div>
     </div>
   );
 }

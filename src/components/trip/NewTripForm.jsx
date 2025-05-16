@@ -57,102 +57,122 @@ function NewTripForm({ addTrip }) {
   }
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold text-blue-500">Create a New Trip</h1>
+    <div className="h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg">
+        <h1 className="text-3xl font-bold text-gray-600 mb-4">
+          Create A New Trip
+        </h1>
 
-      <form onSubmit={handleSubmit} className="mt-4">
-        {/* Title */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Title</label>
-          <input
-            type="text"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          {/* Title */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Title
+            </label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              required
+            />
+          </div>
 
-        {/* Destination */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Destination</label>
-          <input
-            type="text"
-            name="destination"
-            value={formData.destination}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            required
-          />
-        </div>
+          {/* Destination */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Destination
+            </label>
+            <input
+              type="text"
+              name="destination"
+              value={formData.destination}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              required
+            />
+          </div>
 
-        {/* Radius */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Radius (miles/km)</label>
-          <input
-            type="number"
-            name="radius"
-            value={formData.radius}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            min="1"
-            required
-          />
-        </div>
+          {/* Radius */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Radius (miles/km)
+            </label>
+            <input
+              type="number"
+              name="radius"
+              value={formData.radius}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              min="1"
+              required
+            />
+          </div>
 
-        {/* Start Date (optional) */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Start Date</label>
-          <input
-            type="date"
-            name="startDate"
-            value={formData.startDate}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-          />
-        </div>
+          {/* Start Date */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Start Date
+            </label>
+            <input
+              type="date"
+              name="startDate"
+              value={formData.startDate}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
 
-        {/* End Date (required only if startDate exists) */}
-        <div className="mb-4">
-          <label className="block text-gray-700">End Date</label>
-          <input
-            type="date"
-            name="endDate"
-            value={formData.endDate}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            required={!!formData.startDate} // Require only if startDate exists
-            disabled={!formData.startDate} // Disable unless startDate is filled
-          />
-        </div>
+          {/* End Date */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              End Date
+            </label>
+            <input
+              type="date"
+              name="endDate"
+              value={formData.endDate}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              required={!!formData.startDate}
+              disabled={!formData.startDate}
+            />
+          </div>
 
-        {/* Private Trip Checkbox */}
-        <div className="mb-4">
-          <label className="inline-flex items-center">
+          {/* Private Trip */}
+          <div className="flex items-center space-x-2">
             <input
               type="checkbox"
               name="isPrivate"
               checked={formData.isPrivate}
               onChange={handleChange}
-              className="mr-2"
+              className="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
             />
-            Private Trip
-          </label>
-        </div>
+            <label className="text-zinc-700">Private Trip</label>
+          </div>
 
-        {/* Error Messages */}
-        {formErrors.length > 0 && <Alert type="error" messages={formErrors} />}
+          {/* Errors */}
+          {formErrors.length > 0 && (
+            <div className="text-red-600 text-sm space-y-1">
+              {formErrors.map((err, i) => (
+                <p key={i}>{err}</p>
+              ))}
+            </div>
+          )}
 
-        {/* Submit Button */}
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 w-full"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Creating..." : "Create Trip"}
-        </button>
-      </form>
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className={`w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition ${
+              isSubmitting && "opacity-50 cursor-not-allowed"
+            }`}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Creating..." : "Create Trip"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

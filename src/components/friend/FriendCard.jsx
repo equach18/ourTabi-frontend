@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import UserContext from "../../context/UserContext";
+import defaultProfilePic from "../../assets/profilePic.jpg";
+
 
 function FriendCard({
   friend,
@@ -26,11 +28,11 @@ function FriendCard({
     <div className="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-3">
       <div className="flex items-center gap-3">
         <img
-          src={friend.profilePic || "/default-avatar.png"}
+          src={friend.profilePic || defaultProfilePic}
           alt={`${friend.username}'s avatar`}
           className="w-10 h-10 rounded-full object-cover"
         />
-        <div>
+        <div className="text-sm">
           <p className="font-semibold">
             {friend.firstName} {friend.lastName}
           </p>
@@ -68,9 +70,9 @@ function FriendCard({
         {!isRequest && !isSent && !isSearchResult && (
           <button
             onClick={handleRemoveFriend}
-            className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-sm"
+            className="bg-red-500 hover:bg-red-600 text-white px-2 rounded text-sm"
           >
-            Remove
+            X
           </button>
         )}
 

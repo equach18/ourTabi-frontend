@@ -11,29 +11,32 @@ function ActivityList({ activities, trip }) {
   );
 
   return (
-    <div className="mt-8">
-      <div className="flex justify-between items-center">
+    <div className="h-full flex flex-col bg-white px-2 rounded-xl overflow-hidden">
+      <div className="flex justify-between items-center pb-4">
         <h2 className="text-2xl font-semibold">Activities</h2>
         {isTripMember && (
           <Link
             to={`/trips/${trip.id}/activities/new`}
-            className="bg-green-500 text-white px-4 py-2 rounded-lg"
+            className="bg-emerald-500 text-white px-3 py-2 rounded-md  hover:bg-emerald-600"
           >
-            + Add Activity
+            Add Activity
           </Link>
         )}
       </div>
 
-      {/* Show list of activities */}
-      {activities.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          {activities.map((activity) => (
-            <ActivityCard key={activity.id} activity={activity} isTripMember={isTripMember}/>
-          ))}
-        </div>
-      ) : (
-        <p className="text-gray-500 mt-4">No activities yet. Add one now!</p>
-      )}
+      <div className="flex-1 overflow-y-auto py-2 space-y-3">
+        {activities.length > 0 ? (
+          activities.map((activity) => (
+            <ActivityCard
+              key={activity.id}
+              activity={activity}
+              isTripMember={isTripMember}
+            />
+          ))
+        ) : (
+          <p className="text-gray-500 mt-4">No activities yet</p>
+        )}
+      </div>
     </div>
   );
 }

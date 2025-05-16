@@ -1,6 +1,6 @@
 import CommentCard from "./CommentCard";
 
-function CommentList({ comments, members }) {
+function CommentList({ comments }) {
   return (
     <div className="flex-1 overflow-y-auto space-y-4">
       {comments.length > 0 ? (

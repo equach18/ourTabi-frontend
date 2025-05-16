@@ -46,9 +46,17 @@ function EditActivityForm() {
     evt.preventDefault();
     setIsSubmitting(true);
     setFormErrors([]);
+    const formattedScheduledTime = formData.scheduledTime
+      ? new Date(formData.scheduledTime).toISOString()
+      : undefined;
+
+    const activityToSubmit = {
+      ...formData,
+      scheduledTime: formattedScheduledTime,
+    };
 
     try {
-      await editActivity(activity.id, formData);
+      await editActivity(activity.id, activityToSubmit);
       navigate(`/trips/${activity.tripId}`);
     } catch (err) {
       setFormErrors(["Error updating activity. Please try again."]);
@@ -66,112 +74,124 @@ function EditActivityForm() {
   }
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold text-blue-500">Edit Activity</h1>
+    <div className="h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg">
+        <h1 className="text-3xl font-bold text-gray-600 mb-4">Edit Activity</h1>
 
-      <form onSubmit={handleSubmit} className="mt-4">
-        {/* Name */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Activity Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          {/* Error Messages */}
+          {formErrors.length > 0 && (
+            <div className="text-red-600 text-sm space-y-1">
+              {formErrors.map((err, i) => (
+                <p key={i}>{err}</p>
+              ))}
+            </div>
+          )}
 
-        {/* Category */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Category</label>
-          <select
-            type="text"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-            required
-          >
-            {validCategories.map((cat) => (
-              <option key={cat} value={cat}>
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Location */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Location</label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-          />
-        </div>
-
-        {/* Description */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-          />
-        </div>
-
-        {/* Scheduled Time */}
-        <div className="mb-4">
-          <label className="block text-gray-700">Scheduled Time</label>
-          <input
-            type="date"
-            name="scheduledTime"
-            value={formData.scheduledTime || ""}
-            onChange={handleChange}
-            className="w-full p-2 border rounded-lg"
-          />
-        </div>
-
-        {/* Error Messages */}
-        {formErrors.length > 0 && (
-          <div className="text-red-500">
-            {formErrors.map((err, i) => (
-              <p key={i}>{err}</p>
-            ))}
+          {/* Name */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Activity Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              required
+            />
           </div>
-        )}
 
-        {/* Submit & Cancel Buttons */}
-        <div className="flex space-x-4">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 w-full"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? "Updating..." : "Save Changes"}
-          </button>
+          {/* Category */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Category
+            </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              required
+            >
+              {validCategories.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Location */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Location
+            </label>
+            <input
+              type="text"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Description
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          {/* Scheduled Time */}
+          <div>
+            <label className="block text-zinc-700 font-medium mb-1">
+              Scheduled Time
+            </label>
+            <input
+              type="datetime-local"
+              name="scheduledTime"
+              value={formData.scheduledTime || ""}
+              onChange={handleChange}
+              className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          {/* Submit & Cancel Buttons */}
+          <div className="flex space-x-4">
+            <button
+              type="submit"
+              className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Updating..." : "Save Changes"}
+            </button>
+            <button
+              type="button"
+              className="w-full bg-gray-400 text-white py-2 rounded-lg hover:bg-gray-500 transition"
+              onClick={() => navigate(`/trips/${activity.tripId}`)}
+            >
+              Cancel
+            </button>
+          </div>
+
+          {/* Delete Button */}
           <button
             type="button"
-            className="bg-gray-400 text-white px-6 py-3 rounded-lg w-full"
-            onClick={() => navigate(`/trips/${activity.tripId}`)}
+            className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
+            onClick={handleDelete}
           >
-            Cancel
+            Delete Activity
           </button>
-        </div>
-
-        <button
-          type="button"
-          className="mt-4 bg-red-500 text-white px-6 py-3 rounded-lg w-full"
-          onClick={handleDelete}
-        >
-          Delete Activity
-        </button>
-      </form>
+        </form>
+      </div>
     </div>
   );
 }

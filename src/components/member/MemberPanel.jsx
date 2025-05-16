@@ -1,10 +1,8 @@
 import { useState, useContext } from "react";
-import TripContext from "../../context/TripContext";
 import UserContext from "../../context/UserContext";
 import MemberCard from "./MemberCard";
 
 function MemberPanel({ isTripCreator, members }) {
-  // const { members } = useContext(TripContext);
   const { friends } = useContext(UserContext);
   const [isAdding, setIsAdding] = useState(false);
   const eligibleFriends = friends.filter(
@@ -12,23 +10,52 @@ function MemberPanel({ isTripCreator, members }) {
   );
 
   return (
-    <div className="bg-gray-100 p-6 rounded-lg shadow-md w-full md:w-1/3">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold">Members</h2>
+    <div className="h-full flex flex-col bg-white rounded-xl shadow overflow-hidden">
+      <div className="flex justify-between items-center p-4">
+        <h2 className="text-xl font-semibold">Members</h2>
         {isTripCreator && (
           <button
             onClick={() => setIsAdding(!isAdding)}
-            className="text-sm bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+            className="text-sm bg-emerald-600 text-white px-3 py-1 rounded hover:bg-emerald-700"
           >
-            {isAdding ? "Back to Members" : "Add Friends"}
+            {isAdding ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"
+                />
+              </svg>
+            )}
           </button>
         )}
       </div>
 
-      <div className="mt-4">
-        {/* Show list of current members */}
-        {!isAdding &&
-          (members.length > 0 ? (
+      <div className="flex-1 overflow-y-auto px-4 py-2 space-y-3">
+        {!isAdding ? (
+          members.length > 0 ? (
             members.map((member) => (
               <MemberCard
                 key={member.id}
@@ -38,17 +65,14 @@ function MemberPanel({ isTripCreator, members }) {
             ))
           ) : (
             <p className="text-gray-500">No members yet.</p>
-          ))}
-
-        {/* Show list of eligible friends to add */}
-        {isAdding &&
-          (eligibleFriends.length > 0 ? (
-            eligibleFriends.map((friend) => (
-              <MemberCard key={friend.friendId} member={friend} isEditing />
-            ))
-          ) : (
-            <p className="text-gray-500">No eligible friends to add.</p>
-          ))}
+          )
+        ) : eligibleFriends.length > 0 ? (
+          eligibleFriends.map((friend) => (
+            <MemberCard key={friend.friendId} member={friend} isEditing />
+          ))
+        ) : (
+          <p className="text-gray-500">No eligible friends to add.</p>
+        )}
       </div>
     </div>
   );
