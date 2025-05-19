@@ -1,0 +1,53 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Alert component > matches snapshot for default error alert 1`] = `
+<DocumentFragment>
+  <div
+    class="p-3 rounded-lg bg-red-100 text-red-700 border border-red-400 my-2"
+  >
+    <p
+      class="text-sm"
+    >
+      Something went wrong.
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Alert component > matches snapshot for multiple error messages 1`] = `
+<DocumentFragment>
+  <div
+    class="p-3 rounded-lg bg-red-100 text-red-700 border border-red-400 my-2"
+  >
+    <p
+      class="text-sm"
+    >
+      Error 1
+    </p>
+    <p
+      class="text-sm"
+    >
+      Error 2
+    </p>
+    <p
+      class="text-sm"
+    >
+      Error 3
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Alert component > matches snapshot for success alert 1`] = `
+<DocumentFragment>
+  <div
+    class="p-3 rounded-lg bg-green-100 text-green-700 border border-green-400 my-2"
+  >
+    <p
+      class="text-sm"
+    >
+      Action completed successfully.
+    </p>
+  </div>
+</DocumentFragment>
+`;
