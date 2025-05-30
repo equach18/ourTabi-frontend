@@ -2,8 +2,6 @@ import { screen, fireEvent } from "@testing-library/react";
 import FriendPanel from "./FriendPanel";
 import {
   renderWithUserProvider,
-  testUser1,
-  testUser2,
   testFriendsData,
 } from "../../test-helpers/_testCommons";
 

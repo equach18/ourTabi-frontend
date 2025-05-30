@@ -4,7 +4,7 @@ import OurTabiApi from "../../api/ourTabiApi";
 import FriendCard from "./FriendCard";
 import Spinner from "../common/Spinner";
 
-function SearchFriends() {
+function FriendSearchForm() {
   const { friends, incomingRequests, sentRequests } = useContext(UserContext);
 
   const [query, setQuery] = useState("");
@@ -74,4 +74,4 @@ function SearchFriends() {
   );
 }
 
-export default SearchFriends;
+export default FriendSearchForm;

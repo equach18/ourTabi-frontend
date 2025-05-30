@@ -1,0 +1,60 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FriendSearch > matches snapshot for default empty state 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-4"
+  >
+    <form
+      class="flex items-center gap-2 mb-4"
+    >
+      <input
+        class="flex-1 p-2 border rounded"
+        placeholder="Search by username"
+        required=""
+        type="text"
+        value=""
+      />
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FriendSearch > matches snapshot while searching 1`] = `
+<DocumentFragment>
+  <div
+    class="mt-4"
+  >
+    <form
+      class="flex items-center gap-2 mb-4"
+    >
+      <input
+        class="flex-1 p-2 border rounded"
+        placeholder="Search by username"
+        required=""
+        type="text"
+        value="waiting"
+      />
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+    <div
+      class="flex justify-center items-center"
+    >
+      <div
+        class="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

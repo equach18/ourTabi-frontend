@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import UserContext from "../../context/UserContext";
 import FriendTabs from "./FriendTabs";
 import FriendCard from "./FriendCard";
-import FriendSearch from "./FriendSearch";
+import FriendSearchForm from "./FriendSearchForm";
 
 function FriendPanel() {
   const { friends, incomingRequests, sentRequests } = useContext(UserContext);
@@ -50,7 +50,7 @@ function FriendPanel() {
             <p className="text-gray-500">No sent requests.</p>
           ))}
 
-        {activeTab === "search" && <FriendSearch />}
+        {activeTab === "search" && <FriendSearchForm />}
       </div>
     </div>
   );

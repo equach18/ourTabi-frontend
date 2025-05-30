@@ -38,6 +38,7 @@ function UserProvider({ children }) {
           setTrips([]);
           // redirect the the login page and pass error
           if (
+            token &&
             Array.isArray(err) &&
             err[0] === "You do not have permission to access this page."
           ) {
