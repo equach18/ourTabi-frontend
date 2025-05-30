@@ -37,6 +37,7 @@ function MemberCard({ member, isEditing = false, isTripCreator = false }) {
           <button
             onClick={() => handleAddMember(member)}
             className="text-sm bg-green-500 hover:bg-green-600 text-white px-2 rounded"
+            aria-label="add member"
           >
             Add
           </button>
@@ -45,6 +46,7 @@ function MemberCard({ member, isEditing = false, isTripCreator = false }) {
           <button
             onClick={() => handleRemoveMember(member)}
             className="text-sm bg-red-500 hover:bg-red-600 text-white px-2 rounded"
+            aria-label="remove member"
           >
             X
           </button>

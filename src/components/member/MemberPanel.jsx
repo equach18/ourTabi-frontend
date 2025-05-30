@@ -17,6 +17,7 @@ function MemberPanel({ isTripCreator, members }) {
           <button
             onClick={() => setIsAdding(!isAdding)}
             className="text-sm bg-emerald-600 text-white px-3 py-1 rounded hover:bg-emerald-700"
+            aria-label={isAdding ? "Back to members list" : "Show eligible friends"}
           >
             {isAdding ? (
               <svg

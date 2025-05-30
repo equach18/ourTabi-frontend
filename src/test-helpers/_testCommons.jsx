@@ -65,8 +65,8 @@ export const testTrip = {
 };
 
 export const testFriendsData = {
-  friends: [{ ...testUser1 }],
-  incomingRequests: [{ ...testUser2 }],
+  friends: [testUser1 ],
+  incomingRequests: [testUser2],
   sentRequests: [testUser3],
 };
 
@@ -76,6 +76,8 @@ const defaultTripContext = {
   voteOnActivity: vi.fn(),
   votes: {},
   deleteComment: vi.fn(),
+  addMember: vi.fn(),
+  removeMember: vi.fn(),
   members: defaultMembers,
 };
 
@@ -86,6 +88,8 @@ export function createMockTripContext(overrides = {}) {
     votes: {},
     deleteComment: vi.fn(),
     members: [],
+    addMember: vi.fn(),
+    removeMember: vi.fn(),
     ...overrides,
   };
 }

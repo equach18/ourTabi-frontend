@@ -47,7 +47,7 @@ describe("MemberCard", () => {
       },
     });
 
-    const btn = screen.getByRole("button", { name: "X" });
+    const btn = screen.getByRole("button", { name: /remove member/i });
     expect(btn).toBeInTheDocument();
     fireEvent.click(btn);
     expect(mockRemove).toHaveBeenCalledWith(baseMember);
