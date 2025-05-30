@@ -35,7 +35,7 @@ function MemberCard({ member, isEditing = false, isTripCreator = false }) {
       <div className="flex gap-2">
         {isEditing && (
           <button
-            onClick={() => addMember(member)}
+            onClick={() => handleAddMember(member)}
             className="text-sm bg-green-500 hover:bg-green-600 text-white px-2 rounded"
           >
             Add
@@ -43,7 +43,7 @@ function MemberCard({ member, isEditing = false, isTripCreator = false }) {
         )}
         {isTripCreator && !isOwner && (
           <button
-            onClick={() => removeMember(member)}
+            onClick={() => handleRemoveMember(member)}
             className="text-sm bg-red-500 hover:bg-red-600 text-white px-2 rounded"
           >
             X

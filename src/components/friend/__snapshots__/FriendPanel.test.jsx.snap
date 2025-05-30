@@ -1,0 +1,87 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FriendPanel > matches snapshot for default All Friends tab 1`] = `
+<DocumentFragment>
+  <div
+    class="h-full flex flex-col bg-white rounded-xl shadow p-4"
+  >
+    <div
+      class="mb-4"
+    >
+      <h2
+        class="text-lg font-bold text-zinc-800 mb-2"
+      >
+        Friends
+      </h2>
+      <div
+        class="flex flex-wrap gap-2 mb-4"
+      >
+        <button
+          class="px-3 py-1 rounded-lg text-sm font-medium transition-colors
+              bg-blue-500 text-white"
+        >
+          All Friends
+        </button>
+        <button
+          class="px-3 py-1 rounded-lg text-sm font-medium transition-colors
+              bg-gray-200 text-gray-700 hover:bg-gray-300"
+        >
+          Requests (1)
+        </button>
+        <button
+          class="px-3 py-1 rounded-lg text-sm font-medium transition-colors
+              bg-gray-200 text-gray-700 hover:bg-gray-300"
+        >
+          Sent (1)
+        </button>
+        <button
+          class="px-3 py-1 rounded-lg text-sm font-medium transition-colors
+              bg-gray-200 text-gray-700 hover:bg-gray-300"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+    <div
+      class="flex-1 overflow-y-auto space-y-3"
+    >
+      <div
+        class="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-3"
+      >
+        <div
+          class="flex items-center gap-3"
+        >
+          <img
+            alt="testUser1's avatar"
+            class="w-10 h-10 rounded-full object-cover"
+            src="/src/assets/profilePic.jpg"
+          />
+          <div
+            class="text-sm"
+          >
+            <p
+              class="font-semibold"
+            >
+              Test1 User1
+            </p>
+            <p
+              class="text-sm text-gray-500"
+            >
+              @testUser1
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex gap-2"
+        >
+          <button
+            class="bg-red-500 hover:bg-red-600 text-white px-2 rounded text-sm"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

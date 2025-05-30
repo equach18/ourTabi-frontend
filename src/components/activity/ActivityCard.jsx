@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import ActivityVoteButtons from "./ActivityVoteButtons";
 
+/** Displays activity details and allows voting/editing options if the user is a member of the trip */
 function ActivityCard({ activity, isTripMember }) {
   return (
     <div className="border border-zinc-300 p-4 rounded-lg shadow-sm hover:shadow-md transition bg-white">
       <div className="flex justify-between items-start gap-4">
-        {/* Left: Activity Info */}
+        {/* Activity info */}
         <div className="flex-1 space-y-1">
           <div className="flex items-center gap-2">
             <h3 className="text-xl font-bold text-zinc-800">{activity.name}</h3>
@@ -32,23 +33,23 @@ function ActivityCard({ activity, isTripMember }) {
               </Link>
             )}
           </div>
-  
+
           <p className="text-sm text-zinc-600">
             <strong>Category:</strong> {activity.category}
           </p>
-  
+
           {activity.location && (
             <p className="text-sm text-zinc-600">
               <strong>Location:</strong> {activity.location}
             </p>
           )}
-  
+
           {activity.description && (
             <p className="text-sm text-zinc-500">
               <strong>Description:</strong> {activity.description}
             </p>
           )}
-  
+
           {activity.scheduledTime && (
             <p className="text-sm text-zinc-500">
               <strong>Scheduled:</strong>{" "}
@@ -59,8 +60,8 @@ function ActivityCard({ activity, isTripMember }) {
             </p>
           )}
         </div>
-  
-        {/* Right: Voting */}
+
+        {/* Voting */}
         {isTripMember && (
           <div className="flex items-center">
             <ActivityVoteButtons activityId={activity.id} />

@@ -5,8 +5,7 @@ import FriendCard from "./FriendCard";
 import Spinner from "../common/Spinner";
 
 function SearchFriends() {
-  const { currentUser, friends, incomingRequests, sentRequests, sendRequest } =
-    useContext(UserContext);
+  const { friends, incomingRequests, sentRequests } = useContext(UserContext);
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
@@ -22,17 +21,7 @@ function SearchFriends() {
 
     try {
       const users = await OurTabiApi.searchUsers(query.trim());
-
-      // Filter out current user, friends, sent/incoming requests
-      const excludedIds = new Set([
-        currentUser.id,
-        ...friends.map((f) => f.id),
-        ...sentRequests.map((f) => f.id),
-        ...incomingRequests.map((f) => f.id),
-      ]);
-
-      const filtered = users.filter((u) => !excludedIds.has(u.id));
-      setResults(filtered);
+      setResults(users);
     } catch (err) {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -62,17 +51,21 @@ function SearchFriends() {
       {isSearching && <Spinner />}
       {error && <p className="text-red-500">{error}</p>}
 
-      {results.length > 0 && (
-        <div className="mt-3 space-y-3">
-          {results.map((f) => (
-            <FriendCard
-              key={f.id}
-              friend={f}
-              isSearchResult
-            />
-          ))}
-        </div>
-      )}
+      {results.map((f) => {
+        const isFriend = friends.some((fr) => fr.id === f.id);
+        const isSent = sentRequests.some((req) => req.id === f.id);
+        const isRequest = incomingRequests.some((req) => req.id === f.id);
+
+        return (
+          <FriendCard
+            key={f.id}
+            friend={f}
+            isFriend={isFriend}
+            isSent={isSent}
+            isRequest={isRequest}
+          />
+        );
+      })}
 
       {!isSearching && results.length === 0 && query && !error && (
         <p className="text-gray-500">No new users found.</p>
