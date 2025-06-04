@@ -6,11 +6,10 @@ import FriendSearchForm from "./FriendSearchForm";
 
 function FriendPanel() {
   const { friends, incomingRequests, sentRequests } = useContext(UserContext);
-
-  const [activeTab, setActiveTab] = useState("all"); // "all", "requests", "sent", "search"
+  // includes "all", "requests", "sent", "search"
+  const [activeTab, setActiveTab] = useState("all"); 
   return (
     <div className="h-full flex flex-col bg-white rounded-xl shadow p-4">
-      {/* Top: Fixed content */}
       <div className="mb-4">
         <h2 className="text-lg font-bold text-zinc-800 mb-2">Friends</h2>
         <FriendTabs
@@ -21,12 +20,11 @@ function FriendPanel() {
         />
       </div>
 
-      {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto space-y-3">
         {activeTab === "all" &&
           (friends.length > 0 ? (
             friends.map((friend) => (
-              <FriendCard key={friend.userId} friend={friend} />
+              <FriendCard key={friend.userId} friend={friend} isFriend/>
             ))
           ) : (
             <p className="text-gray-500">No friends yet.</p>
@@ -35,7 +33,7 @@ function FriendPanel() {
         {activeTab === "requests" &&
           (incomingRequests.length > 0 ? (
             incomingRequests.map((friend) => (
-              <FriendCard key={friend.id} friend={friend} isRequest />
+              <FriendCard key={friend.userId} friend={friend} isRequest />
             ))
           ) : (
             <p className="text-gray-500">No friend requests.</p>
@@ -44,7 +42,7 @@ function FriendPanel() {
         {activeTab === "sent" &&
           (sentRequests.length > 0 ? (
             sentRequests.map((friend) => (
-              <FriendCard key={friend.id} friend={friend} isSent />
+              <FriendCard key={friend.userId} friend={friend} isSent />
             ))
           ) : (
             <p className="text-gray-500">No sent requests.</p>

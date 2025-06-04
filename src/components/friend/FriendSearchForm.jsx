@@ -5,14 +5,14 @@ import FriendCard from "./FriendCard";
 import Spinner from "../common/Spinner";
 
 function FriendSearchForm() {
-  const { friends, incomingRequests, sentRequests } = useContext(UserContext);
+  const { currentUser, friends, incomingRequests, sentRequests } =
+    useContext(UserContext);
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState(null);
 
-  /** Handle form submission */
   async function handleSearch(evt) {
     evt.preventDefault();
     setIsSearching(true);
@@ -21,7 +21,9 @@ function FriendSearchForm() {
 
     try {
       const users = await OurTabiApi.searchUsers(query.trim());
-      setResults(users);
+      const filtered = users.filter((u) => u.id !== currentUser.id);
+
+      setResults(filtered);
     } catch (err) {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -52,10 +54,9 @@ function FriendSearchForm() {
       {error && <p className="text-red-500">{error}</p>}
 
       {results.map((f) => {
-        const isFriend = friends.some((fr) => fr.id === f.id);
-        const isSent = sentRequests.some((req) => req.id === f.id);
-        const isRequest = incomingRequests.some((req) => req.id === f.id);
-
+        const isFriend = friends.some((fr) => fr.userId === f.id);
+        const isSent = sentRequests.some((req) => req.userId === f.id);
+        const isRequest = incomingRequests.some((req) => req.userId === f.id);
         return (
           <FriendCard
             key={f.id}
@@ -63,6 +64,7 @@ function FriendSearchForm() {
             isFriend={isFriend}
             isSent={isSent}
             isRequest={isRequest}
+            isSearchResult={!isFriend && !isSent && !isRequest}
           />
         );
       })}

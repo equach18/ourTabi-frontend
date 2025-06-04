@@ -59,7 +59,7 @@ function MemberPanel({ isTripCreator, members }) {
           members.length > 0 ? (
             members.map((member) => (
               <MemberCard
-                key={member.id}
+                key={member.userId}
                 member={member}
                 isTripCreator={isTripCreator}
               />
@@ -69,7 +69,7 @@ function MemberPanel({ isTripCreator, members }) {
           )
         ) : eligibleFriends.length > 0 ? (
           eligibleFriends.map((friend) => (
-            <MemberCard key={friend.friendId} member={friend} isEditing />
+            <MemberCard key={friend.userId} member={friend} isEditing />
           ))
         ) : (
           <p className="text-gray-500">No eligible friends to add.</p>
