@@ -6,13 +6,10 @@ import Spinner from "../common/Spinner";
 
 /** Signup form.
  *
- * Shows form and manages update to state on changes.
  * On submission:
  * - calls signup function prop
- * - redirects to /companies route
+ * - redirects to /dashboard route
  *
- * Routes -> SignupForm -> Alert
- * Routed as /signup
  */
 function SignupForm({ signup }) {
   const navigate = useNavigate();
@@ -72,12 +69,13 @@ function SignupForm({ signup }) {
           ["Email", "email", "email"],
         ].map(([label, name, type]) => (
           <div className="mb-3" key={name}>
-            <label className="block text-zinc-700 text-sm font-medium mb-1">
+            <label className="block text-zinc-700 text-sm font-medium mb-1" htmlFor={name}>
               {label}
             </label>
             <input
               type={type}
               name={name}
+              id={name}
               value={formData[name]}
               onChange={handleChange}
               className="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -86,13 +84,14 @@ function SignupForm({ signup }) {
           </div>
         ))}
 
-        {/* Bio */}
+        {/* bio */}
         <div className="mb-3">
-          <label className="block text-zinc-700 text-sm font-medium mb-1">
+          <label className="block text-zinc-700 text-sm font-medium mb-1" htmlFor="bio">
             Bio (Optional)
           </label>
           <textarea
             name="bio"
+            id="bio"
             value={formData.bio}
             onChange={handleChange}
             className="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -102,12 +101,13 @@ function SignupForm({ signup }) {
 
         {/* Profile Picture */}
         <div className="mb-4">
-          <label className="block text-zinc-700 text-sm font-medium mb-1">
+          <label className="block text-zinc-700 text-sm font-medium mb-1" htmlFor="profilePic">
             Profile Picture URL (Optional)
           </label>
           <input
             type="url"
             name="profilePic"
+            id="profilePic"
             value={formData.profilePic}
             onChange={handleChange}
             className="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"

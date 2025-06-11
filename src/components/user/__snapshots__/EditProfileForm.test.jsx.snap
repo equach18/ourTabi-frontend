@@ -1,0 +1,75 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`EditProfileForm > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-10"
+  >
+    <div
+      class="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg"
+    >
+      <h1
+        class="text-3xl font-bold text-gray-600 mb-6"
+      >
+        Edit Profile
+      </h1>
+      <form
+        class="space-y-4"
+      >
+        <input
+          class="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          name="firstName"
+          placeholder="First Name"
+          type="text"
+          value="first"
+        />
+        <input
+          class="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          name="lastName"
+          placeholder="Last Name"
+          type="text"
+          value="last"
+        />
+        <input
+          class="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          name="email"
+          placeholder="Email"
+          type="email"
+          value="first@example.com"
+        />
+        <input
+          class="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          name="profilePic"
+          placeholder="Profile Picture URL"
+          type="url"
+          value="https://example.com/test.jpg"
+        />
+        <textarea
+          class="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          name="bio"
+          placeholder="Tell us about yourself..."
+          rows="4"
+        >
+          test bio
+        </textarea>
+        <div
+          class="flex justify-end space-x-4 pt-2"
+        >
+          <button
+            class="bg-zinc-400 text-white px-5 py-2 rounded-lg hover:bg-zinc-500 transition"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition false"
+            type="submit"
+          >
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</DocumentFragment>
+`;

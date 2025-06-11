@@ -1,0 +1,61 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginForm > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] bg-gradient-to-r from-stone-300 via-white to-stone-300 px-4"
+  >
+    <h1
+      class="text-3xl font-bold text-orange-500 font-heading mb-4"
+    >
+      Welcome Back
+    </h1>
+    <form
+      class="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm"
+    >
+      <div
+        class="mb-3"
+      >
+        <label
+          class="block text-zinc-700 text-sm font-medium mb-1"
+          for="username"
+        >
+          Username
+        </label>
+        <input
+          class="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          id="username"
+          name="username"
+          required=""
+          type="text"
+          value=""
+        />
+      </div>
+      <div
+        class="mb-4"
+      >
+        <label
+          class="block text-zinc-700 text-sm font-medium mb-1"
+          for="password"
+        >
+          Password
+        </label>
+        <input
+          class="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          id="password"
+          name="password"
+          required=""
+          type="password"
+          value=""
+        />
+      </div>
+      <button
+        class="bg-emerald-600 text-white px-4 py-2 rounded-lg w-full hover:bg-emerald-700 transition"
+        type="submit"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+</DocumentFragment>
+`;

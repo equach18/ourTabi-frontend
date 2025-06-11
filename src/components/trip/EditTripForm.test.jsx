@@ -13,19 +13,20 @@ vi.mock("react-router-dom", async () => {
   };
 });
 
-const testTrip = {
-  id: 24,
-  title: "Test Trip",
-  destination: "Tokyo",
-  radius: 25,
-  startDate: "2025-07-01",
-  endDate: "2025-07-05",
-  isPrivate: true,
-};
 
 describe("EditTripForm", () => {
   const mockEditTrip = vi.fn();
 
+  const testTrip = {
+    id: 24,
+    title: "Test Trip",
+    destination: "Tokyo",
+    radius: 25,
+    startDate: "2025-07-01",
+    endDate: "2025-07-05",
+    isPrivate: true,
+  };
+  
   function renderForm() {
     return renderWithAllProviders(
       <Routes>

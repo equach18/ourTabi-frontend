@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Alert from "../common/Alert";
 
 function EditProfileForm({ updateUser, currentUser }) {
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function EditProfileForm({ updateUser, currentUser }) {
         <h1 className="text-3xl font-bold text-gray-600 mb-6">Edit Profile</h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* First Name */}
+          {/* first name */}
           <input
             type="text"
             name="firstName"
@@ -72,7 +73,7 @@ function EditProfileForm({ updateUser, currentUser }) {
             className="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
 
-          {/* Last Name */}
+          {/* last name */}
           <input
             type="text"
             name="lastName"
@@ -82,7 +83,7 @@ function EditProfileForm({ updateUser, currentUser }) {
             className="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
 
-          {/* Email */}
+          {/* email */}
           <input
             type="email"
             name="email"
@@ -92,7 +93,7 @@ function EditProfileForm({ updateUser, currentUser }) {
             className="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
 
-          {/* Profile Pic */}
+          {/* profile pic */}
           <input
             type="url"
             name="profilePic"
@@ -102,7 +103,7 @@ function EditProfileForm({ updateUser, currentUser }) {
             className="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
 
-          {/* Bio */}
+          {/* bio */}
           <textarea
             name="bio"
             placeholder="Tell us about yourself..."
@@ -112,16 +113,9 @@ function EditProfileForm({ updateUser, currentUser }) {
             className="w-full py-2 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
           />
 
-          {/* Errors */}
-          {formErrors.length > 0 && (
-            <div className="text-red-600 text-sm space-y-1">
-              {formErrors.map((err, i) => (
-                <p key={i}>{err}</p>
-              ))}
-            </div>
-          )}
+          {/* errors */}
+          <Alert type="error" messages={formErrors} />
 
-          {/* Buttons */}
           <div className="flex justify-end space-x-4 pt-2">
             <button
               type="button"

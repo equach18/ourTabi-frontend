@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import Alert from "../common/Alert";
-import Spinner from "../common/Spinner";
 
 /** Login form.
  *
- * Shows form and manages update to state on changes.
  * On submission:
  * - Calls login function prop
  * - Redirects to /dashboard route if successful
@@ -66,12 +64,13 @@ function LoginForm({ login }) {
         )}
 
         <div className="mb-3">
-          <label className="block text-zinc-700 text-sm font-medium mb-1">
+          <label className="block text-zinc-700 text-sm font-medium mb-1" htmlFor="username">
             Username
           </label>
           <input
             type="text"
             name="username"
+            id="username"
             value={formData.username}
             onChange={handleChange}
             className="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -80,12 +79,13 @@ function LoginForm({ login }) {
         </div>
 
         <div className="mb-4">
-          <label className="block text-zinc-700 text-sm font-medium mb-1">
+          <label className="block text-zinc-700 text-sm font-medium mb-1" htmlFor="password">
             Password
           </label>
           <input
             type="password"
             name="password"
+            id="password"
             value={formData.password}
             onChange={handleChange}
             className="w-full py-1 px-2 text-sm border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
