@@ -16,10 +16,10 @@ function TripDetailsPage({ currentUser, removeTrip }) {
     }
   }, [trip, navigate]);
 
-  // handle limited access on trip details if user is not  a member
-  const isMember = members.some((m) => m.userId === currentUser.id);
-  // handle limited access if user is not the owner
-  const isTripCreator = trip.creatorId === currentUser.id;
+  if (!trip || !currentUser) return null;
+
+  const isMember = members?.some((m) => m.userId === currentUser?.id);
+  const isTripCreator = trip?.creatorId === currentUser?.id;
 
   async function handleDelete() {
     if (window.confirm("Are you sure you want to delete this trip?")) {
@@ -30,7 +30,6 @@ function TripDetailsPage({ currentUser, removeTrip }) {
 
   return (
     <div className="h-[calc(100vh-4rem)] grid grid-cols-1 lg:grid-cols-[280px_1fr_280px] gap-6 px-6 pt-10 pb-12 bg-gradient-to-r from-stone-300 via-white to-stone-300">
-      {/* LEFT: Trip Info + Members */}
       <div className="flex flex-col gap-6 overflow-hidden">
         {/* Trip Info */}
         <div className="bg-white p-4 rounded-xl shadow max-h-[45%] overflow-y-auto">
@@ -62,12 +61,12 @@ function TripDetailsPage({ currentUser, removeTrip }) {
         )}
       </div>
 
-      {/* CENTER: Activities */}
+      {/* Activities */}
       <div className="bg-white p-4 rounded-xl shadow h-full overflow-y-auto">
         <ActivityList activities={activities} trip={trip} />
       </div>
 
-      {/* RIGHT: Comments */}
+      {/* Comments */}
       {isMember && (
         <div className="bg-white rounded-xl shadow flex flex-col h-full overflow-hidden">
           <CommentPanel />

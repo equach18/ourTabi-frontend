@@ -1,0 +1,66 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Dashboard > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="h-[calc(100vh-4rem)] grid grid-cols-1 lg:grid-cols-[240px_1fr_280px] gap-6 px-6 pb-10 pt-12"
+  >
+    <div
+      class="w-full"
+    >
+      <div
+        data-testid="UserProfileSidebar"
+      />
+    </div>
+    <div
+      class="bg-white p-4 rounded-xl shadow h-full overflow-y-auto"
+    >
+      <div
+        class="bg-blue-100 border-l-4 border-blue-500 p-4 mb-4 rounded-lg shadow-sm"
+      >
+        <h1
+          class="text-2xl font-bold text-blue-500 font-heading"
+        >
+          Welcome back, testUser1!
+        </h1>
+      </div>
+      <div
+        class="flex items-center justify-between mb-4 mt-2"
+      >
+        <h2
+          class="text-xl font-semibold text-zinc-700"
+        >
+          Your Trips
+        </h2>
+        <a
+          class="bg-emerald-600 text-white px-5 py-2 rounded-lg hover:bg-emerald-700 transition"
+          data-discover="true"
+          href="/trips/new"
+        >
+          + Create a New Trip
+        </a>
+      </div>
+      <div
+        class="flex-1"
+      >
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"
+        >
+          <p
+            class="text-gray-500"
+          >
+            No trips yet. Start planning now!
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="hidden lg:block w-full h-[80vh] overflow-y-auto"
+    >
+      <div
+        data-testid="FriendPanel"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

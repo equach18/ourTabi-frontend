@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TripSearchResults > matches snapshot when there is no search term 1`] = `
+<DocumentFragment>
+  <div
+    class="h-[calc(100vh-4rem)] px-50 py-12"
+  >
+    <h2
+      class="text-xl font-semibold mb-4"
+    >
+      Search results for: 
+      <span
+        class="text-blue-600"
+      />
+    </h2>
+    <p
+      class="text-gray-500"
+    >
+      No trips found.
+    </p>
+  </div>
+</DocumentFragment>
+`;

@@ -63,6 +63,7 @@ export const testTrip = {
   endDate: "2025-07-12",
   isPrivate: true,
   members: [],
+  creatorId: 1
 };
 
 export const testFriendsData = {

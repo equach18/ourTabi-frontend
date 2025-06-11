@@ -3,7 +3,6 @@ import { describe, it, expect } from "vitest";
 import UserProfileSidebar from "./UserProfileSidebar";
 import {
   renderWithAllProviders,
-  testUser1,
 } from "../../test-helpers/_testCommons";
 import defaultProfilePic from "../../assets/profilePic.jpg";
 
