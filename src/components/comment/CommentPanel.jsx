@@ -8,7 +8,7 @@ function CommentsPanel() {
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    // Scroll to bottom whenever comments update
+    // scroll to bottom whenever comments update
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }

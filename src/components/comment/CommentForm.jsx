@@ -1,4 +1,3 @@
-// CommentForm.jsx
 import { useState } from "react";
 
 function CommentForm({ addComment }) {
