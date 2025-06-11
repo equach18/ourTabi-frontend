@@ -34,15 +34,7 @@ function Home({ currentUser }) {
             </Link>
           </div>
         </div>
-        {/* 
-        Right: Image
-        <div className="w-full md:w-1/2 max-h-[580px] overflow-hidden rounded-xl">
-          <img
-            src={homePic}
-            alt="Japanese temple"
-            className="w-full h-full object-cover"
-          />
-        </div> */}
+        
         <div className="relative group w-full md:w-1/2 h-[580px] rounded-xl overflow-hidden shadow-xl border border-stone-200">
           {/* Image */}
           <img

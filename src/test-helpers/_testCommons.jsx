@@ -62,17 +62,19 @@ export const testTrip = {
   startDate: "2025-07-10",
   endDate: "2025-07-12",
   isPrivate: true,
+  members: [],
 };
 
 export const testFriendsData = {
-  friends: [testUser1 ],
+  friends: [testUser1],
   incomingRequests: [testUser2],
   sentRequests: [testUser3],
 };
 
 // Default mock context values
-const defaultUserContext = { currentUser: testUser1 };
-const defaultTripContext = {
+export const defaultUserContext = { currentUser: testUser1 };
+export const defaultTripContext = {
+  activities: [testActivity],
   voteOnActivity: vi.fn(),
   votes: {},
   deleteComment: vi.fn(),
@@ -81,7 +83,6 @@ const defaultTripContext = {
   members: defaultMembers,
 };
 
-// create mock trip context
 export function createMockTripContext(overrides = {}) {
   return {
     voteOnActivity: vi.fn(),

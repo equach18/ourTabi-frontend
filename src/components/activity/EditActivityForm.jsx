@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TripContext from "../../context/TripContext";
+import Alert from "../common/Alert";
 
 function EditActivityForm() {
   const { activities, deleteActivity, editActivity } = useContext(TripContext);
@@ -79,23 +80,18 @@ function EditActivityForm() {
         <h1 className="text-3xl font-bold text-gray-600 mb-4">Edit Activity</h1>
 
         <form onSubmit={handleSubmit} className="space-y-3">
-          {/* Error Messages */}
-          {formErrors.length > 0 && (
-            <div className="text-red-600 text-sm space-y-1">
-              {formErrors.map((err, i) => (
-                <p key={i}>{err}</p>
-              ))}
-            </div>
-          )}
+          {/* error alerts */}
+          <Alert type="error" messages={formErrors} />
 
-          {/* Name */}
+          {/* name */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="name">
               Activity Name
             </label>
             <input
               type="text"
               name="name"
+              id="name"
               value={formData.name}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -103,13 +99,14 @@ function EditActivityForm() {
             />
           </div>
 
-          {/* Category */}
+          {/* category */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="category">
               Category
             </label>
             <select
               name="category"
+              id="category"
               value={formData.category}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -123,13 +120,14 @@ function EditActivityForm() {
             </select>
           </div>
 
-          {/* Location */}
+          {/* location */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="location">
               Location
             </label>
             <input
               type="text"
+              id="location"
               name="location"
               value={formData.location}
               onChange={handleChange}
@@ -137,34 +135,35 @@ function EditActivityForm() {
             />
           </div>
 
-          {/* Description */}
+          {/* description */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="description">
               Description
             </label>
             <textarea
               name="description"
+              id="description"
               value={formData.description}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
 
-          {/* Scheduled Time */}
+          {/* scheduled time */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="scheduledTime">
               Scheduled Time
             </label>
             <input
               type="datetime-local"
               name="scheduledTime"
+              id="scheduledTime"
               value={formData.scheduledTime || ""}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
 
-          {/* Submit & Cancel Buttons */}
           <div className="flex space-x-4">
             <button
               type="submit"
@@ -182,7 +181,6 @@ function EditActivityForm() {
             </button>
           </div>
 
-          {/* Delete Button */}
           <button
             type="button"
             className="w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"

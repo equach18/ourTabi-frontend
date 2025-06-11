@@ -29,7 +29,6 @@ function NewActivityForm() {
   const [formErrors, setFormErrors] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  /** Handle form submission */
   async function handleSubmit(evt) {
     evt.preventDefault();
     setIsSubmitting(true);
@@ -68,23 +67,18 @@ function NewActivityForm() {
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-3">
-          {/* Error Alert */}
-          {formErrors.length > 0 && (
-            <div className="text-red-600 text-sm space-y-1">
-              {formErrors.map((err, i) => (
-                <p key={i}>{err}</p>
-              ))}
-            </div>
-          )}
+          {/* error alerts */}
+          <Alert type="error" messages={formErrors} />
 
-          {/* Activity Name */}
+          {/* name */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="name">
               Activity Name
             </label>
             <input
               type="text"
               name="name"
+              id="name"
               value={formData.name}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -92,13 +86,14 @@ function NewActivityForm() {
             />
           </div>
 
-          {/* Category */}
+          {/* category */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="category">
               Category
             </label>
             <select
               name="category"
+              id="category"
               value={formData.category}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -111,13 +106,14 @@ function NewActivityForm() {
             </select>
           </div>
 
-          {/* Description */}
+          {/* description */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="description">
               Description (optional)
             </label>
             <textarea
               name="description"
+              id="description"
               value={formData.description}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -125,14 +121,15 @@ function NewActivityForm() {
             />
           </div>
 
-          {/* Location */}
+          {/* location */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="location">
               Location (optional)
             </label>
             <input
               type="text"
               name="location"
+              id="location"
               value={formData.location}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -140,14 +137,15 @@ function NewActivityForm() {
             />
           </div>
 
-          {/* Scheduled Time */}
+          {/* scheduled time */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="scheduledTime">
               Scheduled Time (optional)
             </label>
             <input
               type="datetime-local"
               name="scheduledTime"
+              id="scheduledTime"
               value={formData.scheduledTime}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
