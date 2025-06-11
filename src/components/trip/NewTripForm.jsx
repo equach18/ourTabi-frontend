@@ -64,14 +64,15 @@ function NewTripForm({ addTrip }) {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-3">
-          {/* Title */}
+          {/* title */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="title">
               Title
             </label>
             <input
               type="text"
               name="title"
+              id="title"
               value={formData.title}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -79,14 +80,15 @@ function NewTripForm({ addTrip }) {
             />
           </div>
 
-          {/* Destination */}
+          {/* destination */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="destination">
               Destination
             </label>
             <input
               type="text"
               name="destination"
+              id="destination"
               value={formData.destination}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -94,14 +96,15 @@ function NewTripForm({ addTrip }) {
             />
           </div>
 
-          {/* Radius */}
+          {/* radius */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="radius">
               Radius (miles/km)
             </label>
             <input
               type="number"
               name="radius"
+              id="radius"
               value={formData.radius}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -110,28 +113,30 @@ function NewTripForm({ addTrip }) {
             />
           </div>
 
-          {/* Start Date */}
+          {/* start date */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="startDate">
               Start Date
             </label>
             <input
               type="date"
               name="startDate"
+              id="startDate"
               value={formData.startDate}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
 
-          {/* End Date */}
+          {/* end date */}
           <div>
-            <label className="block text-zinc-700 font-medium mb-1">
+            <label className="block text-zinc-700 font-medium mb-1" htmlFor="endDate">
               End Date
             </label>
             <input
               type="date"
               name="endDate"
+              id="endDate"
               value={formData.endDate}
               onChange={handleChange}
               className="w-full py-1 px-3 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -140,28 +145,22 @@ function NewTripForm({ addTrip }) {
             />
           </div>
 
-          {/* Private Trip */}
+          {/* privacy */}
           <div className="flex items-center space-x-2">
             <input
               type="checkbox"
               name="isPrivate"
+              id="privacy"
               checked={formData.isPrivate}
               onChange={handleChange}
               className="w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500"
             />
-            <label className="text-zinc-700">Private Trip</label>
+            <label className="text-zinc-700" htmlFor="privacy">Private Trip</label>
           </div>
 
-          {/* Errors */}
-          {formErrors.length > 0 && (
-            <div className="text-red-600 text-sm space-y-1">
-              {formErrors.map((err, i) => (
-                <p key={i}>{err}</p>
-              ))}
-            </div>
-          )}
+          {/* error alerts */}
+          <Alert type="error" messages={formErrors} />
 
-          {/* Submit Button */}
           <button
             type="submit"
             className={`w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition ${

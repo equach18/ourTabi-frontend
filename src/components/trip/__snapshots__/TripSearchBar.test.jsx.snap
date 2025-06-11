@@ -1,0 +1,22 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TripSearchBar > matches snapshot 1`] = `
+<DocumentFragment>
+  <form
+    class="flex items-center space-x-2"
+  >
+    <input
+      class="w-64 bg-white px-2 py-1 border rounded-md text-sm"
+      placeholder="Search by location or title"
+      type="text"
+      value=""
+    />
+    <button
+      class="bg-emerald-600 text-white px-3 py-1 rounded-md text-sm hover:bg-emerald-700"
+      type="submit"
+    >
+      Go
+    </button>
+  </form>
+</DocumentFragment>
+`;
