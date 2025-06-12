@@ -204,15 +204,6 @@ function UserProvider({ children }) {
     try {
       await OurTabiApi.acceptFriendRequest(friend.friendId);
 
-      // const newFriend = {
-      //   id: friend.id,
-
-      //   username: friend.username,
-      //   firstName: friend.firstName,
-      //   lastName: friend.lastName,
-      //   email: friend.email,
-      //   profilePic: friend.profilePic,
-      // };
       setFriends((prev) => [...prev, friend]);
 
       // Remove from incomingRequests
