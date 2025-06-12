@@ -8,7 +8,6 @@ function NavBar() {
 
   return (
     <nav className="bg-stone-300 shadow px-6 py-4 flex items-center justify-between relative">
-      {/* Left: Logo */}
       <NavLink
         to={currentUser ? "/dashboard" : "/"}
         className="text-2xl font-bold text-orange-600 font-heading z-10 hover:text-orange-500 transition"
@@ -16,14 +15,12 @@ function NavBar() {
         OurTabi
       </NavLink>
 
-      {/* Center: Search */}
       {currentUser && (
         <div className="absolute left-1/2 transform -translate-x-1/2">
           <TripSearchBar />
         </div>
       )}
 
-      {/* Right: Auth Buttons */}
       <div className="flex items-center space-x-4 z-10">
         {currentUser ? (
           <button

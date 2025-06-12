@@ -1,0 +1,70 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NavBar > matches snapshot when logged in 1`] = `
+<DocumentFragment>
+  <nav
+    class="bg-stone-300 shadow px-6 py-4 flex items-center justify-between relative"
+  >
+    <a
+      class="text-2xl font-bold text-orange-600 font-heading z-10 hover:text-orange-500 transition"
+      data-discover="true"
+      href="/dashboard"
+    >
+      OurTabi
+    </a>
+    <div
+      class="absolute left-1/2 transform -translate-x-1/2"
+    >
+      <div
+        data-testid="TripSearchBar"
+      >
+        Mock SearchBar
+      </div>
+    </div>
+    <div
+      class="flex items-center space-x-4 z-10"
+    >
+      <button
+        class="text-slate-600 hover:text-orange-500 transition"
+      >
+        Logout
+      </button>
+    </div>
+  </nav>
+</DocumentFragment>
+`;
+
+exports[`NavBar > matches snapshot when logged out 1`] = `
+<DocumentFragment>
+  <nav
+    class="bg-stone-300 shadow px-6 py-4 flex items-center justify-between relative"
+  >
+    <a
+      aria-current="page"
+      class="text-2xl font-bold text-orange-600 font-heading z-10 hover:text-orange-500 transition active"
+      data-discover="true"
+      href="/"
+    >
+      OurTabi
+    </a>
+    <div
+      class="flex items-center space-x-4 z-10"
+    >
+      <a
+        class="text-slate-600 hover:text-orange-500 transition"
+        data-discover="true"
+        href="/login"
+      >
+        Login
+      </a>
+      <a
+        class="text-slate-600 hover:text-orange-500 transition"
+        data-discover="true"
+        href="/signup"
+      >
+        Sign Up
+      </a>
+    </div>
+  </nav>
+</DocumentFragment>
+`;

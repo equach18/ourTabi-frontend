@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RouteList > matches snapshot for dashboard when logged in 1`] = `
+<DocumentFragment>
+  <div>
+    Dashboard
+  </div>
+</DocumentFragment>
+`;
+
+exports[`RouteList > matches snapshot for home route 1`] = `
+<DocumentFragment>
+  <div>
+    Home Page
+  </div>
+</DocumentFragment>
+`;
+
+exports[`RouteList > matches snapshot for login route 1`] = `
+<DocumentFragment>
+  <div>
+    Login Form
+  </div>
+</DocumentFragment>
+`;
+
+exports[`RouteList > matches snapshot for unmatched route 1`] = `
+<DocumentFragment>
+  <div>
+    Not Found
+  </div>
+</DocumentFragment>
+`;
