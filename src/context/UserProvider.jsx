@@ -4,7 +4,7 @@ import UserContext from "./UserContext";
 import OurTabiApi from "../api/ourTabiApi";
 import Spinner from "../components/common/Spinner";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function UserProvider({ children }) {
   const [token, setToken] = useLocalStorage("token", null);
@@ -16,6 +16,7 @@ function UserProvider({ children }) {
   const [sentRequests, setSentRequests] = useState([]);
 
   const navigate = useNavigate();
+  const location = useLocation();
   // Load user profile if token exists
   useEffect(() => {
     async function getCurrentUser() {
@@ -40,7 +41,8 @@ function UserProvider({ children }) {
           if (
             token &&
             Array.isArray(err) &&
-            err[0] === "You do not have permission to access this page."
+            err[0] === "You do not have permission to access this page." &&
+            location.pathname !== "/" // Only redirect if not on homepage
           ) {
             navigate("/login", { state: { alert: err[0] } });
           }
@@ -257,6 +259,7 @@ function UserProvider({ children }) {
         sendRequest,
         acceptRequest,
         removeFriendship,
+        isLoading,
       }}
     >
       {children}
